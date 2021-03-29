@@ -1,0 +1,2 @@
+$ git remote set-url origin https://github.com/YaraDorgham/the-movie-pal.git
+$ git remote add origin https://github.com/YaraDorgham/the-movie-pal.git
