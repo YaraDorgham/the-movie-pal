@@ -16,7 +16,9 @@ const App =()=>{
             setMovies (response.data.results.slice(0,5));
             const genresResponse= await axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key='+api_key);
             setGenres(genresResponse.data.genres);
+           
             console.log(genres);
+           
         }
         fetchData()
          
