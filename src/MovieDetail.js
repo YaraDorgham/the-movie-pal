@@ -4,12 +4,15 @@ import Modal from 'react-modal';
 import './MovieDetail.css';
 import { Button} from 'react-bootstrap';
 import Popup from './Popup';
+import { useHistory } from 'react-router-dom'
 
-
-const MovieDetail=({title, description, genres ,rating,imgPath})=>{
+const MovieDetail=({id,title, description, genres ,rating,imgPath})=>{
     const [showPopup ,setShowPopup]=useState(false);
-    
-    const handleShow = () => setShowPopup(true); 
+    const history = useHistory();
+    const handleShow = () =>{ 
+        setShowPopup(true);
+        
+    } 
     const closeShow = () => setShowPopup(false); 
 
     const path='https://image.tmdb.org/t/p/w200/' + imgPath;

@@ -2,8 +2,8 @@ import React ,{useEffect, useState}from 'react';
 import axios from 'axios';
 import MovieList from './MovieList';
 import SearchBar from './SearchBar';
-
-
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Header from './Header';
 const App =()=>{
     const api_key='78da18deb28f6efe0113be955d928e99';
     const[movies,setMovies]=useState([]);
@@ -34,11 +34,24 @@ const App =()=>{
 
     return (
         <div>
+            <BrowserRouter>
+            <Header />
             
-            <h1>Playing Now</h1>
-            <MovieList movies={movies} />
-            <SearchBar onSubmit={onSearchSubmit}/>
-            <MovieList movies={searchMovies} />
+                <Switch>
+                    <Route exact path="/">
+                    <h1>Playing Now</h1>
+                    <MovieList movies={movies} />  
+                    </Route>
+                    <Route path="/search">
+                         <SearchBar onSubmit={onSearchSubmit}/> 
+                         <MovieList movies={searchMovies} /> 
+                    </Route>
+                    
+               </Switch>
+            </BrowserRouter>
+            
+            
+            
 
         </div>
             );
