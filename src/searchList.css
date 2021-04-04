@@ -1,0 +1,13 @@
+.searchHistory{
+    color: rgb(49, 146, 211);
+}
+
+
+.alignHorz {
+    flex-direction: row;
+    display: flex;
+    padding-left: 30px;
+    
+    align-content: space-between;
+    
+  }

@@ -5,6 +5,7 @@ import './MovieDetail.css';
 import { Button} from 'react-bootstrap';
 import Popup from './Popup';
 
+
 const MovieDetail=({title, description, genres ,rating,imgPath})=>{
     const [showPopup ,setShowPopup]=useState(false);
     
