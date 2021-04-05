@@ -15,7 +15,7 @@ const SearchBar =(props)=>{
   
 
     const checkSize =async()=>{
-        await moviesRef.get().then(function(querySnapshot){
+        await moviesRef.get().then(function(){
             if(searchHistory.length===6){
                 moviesRef.where('term','==',searchHistory[0]).get().then(function(querySnapshot){
                     querySnapshot.forEach(function(doc){
@@ -48,7 +48,7 @@ const SearchBar =(props)=>{
 
     };
 
-    
+    /* eslint-disable no-unused-vars */
     const renderSearchHistory =async()=>{
         const searchData=await moviesRef.get();
         console.log(searchData);
@@ -57,6 +57,7 @@ const SearchBar =(props)=>{
         // });
         // return <div>{allSearch}</div>;
     };
+    /* eslint-disable no-unused-vars */
 
    
     return(
