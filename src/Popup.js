@@ -1,28 +1,22 @@
-import React,{useEffect,useState} from 'react';  
+import React,{useEffect,useState,useHistory} from 'react';  
 import { Spinner } from 'react-bootstrap';
 import './Popup.css';  
+import axios from 'axios';
+const api_key='78da18deb28f6efe0113be955d928e99'; 
 
 const Popup =(props)=>  {  
     const [movie,setMovie]=useState([]);
 
-
 useEffect( ()=>{
 
-    console.log(props.movieID);
-    console.log(props.movieList);
-
-    const data=(props.movieList).find(element => element.id ==props.movieID);
-    console.log(data);
-    setMovie(data);
-    //    const fetchData= ()=> {
-    //       return props.movieList.find((element) => {
-    //        return element.id === props.movieID;
-    //     })
+    async function fetchData(){
+        const response= await axios.get('https://api.themoviedb.org/3/movie/'+props.movieID +'?api_key='+api_key);
+        setMovie(response.data);
         
-    //   }
-      //fetchData();
-    //console.log(fetchData());
-   // setMovie(fetchData());
+       
+    }
+    fetchData()
+   
      
 },[]);
 

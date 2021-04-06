@@ -34,19 +34,11 @@ const SearchBar =(props)=>{
         await moviesRef
         .where("term", "==", obj).get()
         .then(function(querySnapshot) {
-            if (!querySnapshot.empty) {
-                console.log("Document Exist");
-            }
-            else {
-
-                console.log("Document Doesn't Exist");
-                moviesRef.add({term:obj,created: new Date()})
-                console.log( renderSearch());
-
-               // setSearchHistory([...searchHistory,obj]);
-               // console.log(searchHistory);
-                //checkSize();
-            }
+           
+         
+            moviesRef.add({term:obj,created: new Date()})
+                
+            
 
         });
 
@@ -56,9 +48,6 @@ const SearchBar =(props)=>{
     var terms=[];
     moviesRef.orderBy("created","desc").limit(5).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            
-            console.log( doc.data().term);
             terms=[...terms,doc.data().term]
             
         });

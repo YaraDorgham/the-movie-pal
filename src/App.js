@@ -1,4 +1,4 @@
-import React ,{useEffect, useState}from 'react';
+import React ,{useEffect, useState,useHistory}from 'react';
 import axios from 'axios';
 import MovieList from './MovieList';
 import SearchBar from './SearchBar';
@@ -6,14 +6,16 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Popup from './Popup';
 import Spinner from './Spinner';
+
 const App =()=>{
     const api_key='78da18deb28f6efe0113be955d928e99';   
     const[movies,setMovies]=useState([]);
     const[allmovies,setallMovies]=useState([]);
     const[searchMovies,setSearchMovies]=useState([]);
     const [genres,setGenres]=useState([]);
-     
    
+
+ 
     useEffect( ()=>{
  
         async function fetchData(){
@@ -49,13 +51,13 @@ const App =()=>{
                     <Route path="/search">
                          <SearchBar onSubmit={onSearchSubmit}/> 
                          <MovieList movies={searchMovies} genreList={genres}/> 
-                    </Route>
+                    </Route >
                     {/* <Route exact path="/movie/:id" render={({match}) => (
                         movies.length===0 ? <Spinner />: <Popup movie={movies.find(m => m.id === match.params.id)} />
                     )} /> */}
 
-                        <Route exact path="/movie/:id" render={({match}) => (
-                        movies.length===0 ? <Spinner />: <Popup movieList ={allmovies} movieID={match.params.id} />
+                        <Route  path="/movie/:id" render={({match}) => (
+                        movies.length===0 ? <Spinner />: <Popup  movieID={match.params.id} />
                     )} />
 
                </Switch>
