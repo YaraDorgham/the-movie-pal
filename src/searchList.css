@@ -1,13 +1,12 @@
-.searchHistory{
-    color: rgb(49, 146, 211);
+.searchHistory {
+  color: rgb(7, 1, 61);
+  font-size: 15px;
 }
 
-
 .alignHorz {
-    flex-direction: row;
-    display: flex;
-    padding-left: 30px;
-    
-    align-content: space-between;
-    
-  }
+  flex-direction: row;
+  display: flex;
+  padding-left: 30px;
+
+  align-content: space-between;
+}

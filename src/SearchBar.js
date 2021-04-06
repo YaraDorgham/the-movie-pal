@@ -1,31 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './SearchBar.css';
 import firebase from "./firebase";
 import SearchList from './SearchList';
+import { Spinner } from 'react-bootstrap';
 const SearchBar =(props)=>{
     const [term,setTerm]=useState('');
     const [searchHistory,setSearchHistory]=useState([]);
-    var moviesRef = firebase.firestore().collection("/moviesearch");
+    var moviesRef = firebase.firestore().collection("moviesearch"); 
+    var data=[];
+    var searchTerms=[];
     const onFormSubmit= (event)=>{
         event.preventDefault();
         props.onSubmit(term);
         addSearch(term);
     };
 
+
+    useEffect( ()=>{
+        renderSearch();
+        data = firebase.firestore().collection("moviesearch").get();
+     
+         
+    },[moviesRef]);
+
+    
+
   
 
-    const checkSize =async()=>{
-        await moviesRef.get().then(function(){
-            if(searchHistory.length===6){
-                moviesRef.where('term','==',searchHistory[0]).get().then(function(querySnapshot){
-                    querySnapshot.forEach(function(doc){
-                        doc.ref.delete();
-                    });
-                });
-                setSearchHistory(searchHistory.splice(1,5));
-            }
-        });
-    };
+ 
 
     const addSearch = async(obj) => {  
 
@@ -39,25 +41,32 @@ const SearchBar =(props)=>{
 
                 console.log("Document Doesn't Exist");
                 moviesRef.add({term:obj,created: new Date()})
-                setSearchHistory([...searchHistory,obj]);
-                console.log(searchHistory);
-                checkSize();
+                console.log( renderSearch());
+
+               // setSearchHistory([...searchHistory,obj]);
+               // console.log(searchHistory);
+                //checkSize();
             }
 
         });
 
     };
 
-    /* eslint-disable no-unused-vars */
-    const renderSearchHistory =async()=>{
-        const searchData=await moviesRef.get();
-        console.log(searchData);
-        // const allSearch =searchData.docs.map((doc)=>{
-        //     return <p>{doc.term}</p>
-        // });
-        // return <div>{allSearch}</div>;
-    };
-    /* eslint-disable no-unused-vars */
+  const renderSearch = ()=>{
+    var terms=[];
+    moviesRef.orderBy("created","desc").limit(5).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            
+            console.log( doc.data().term);
+            terms=[...terms,doc.data().term]
+            
+        });
+        setSearchHistory(terms)
+    });
+  
+    return terms;
+  }
 
    
     return(
@@ -75,7 +84,8 @@ const SearchBar =(props)=>{
                 </div>
             </form>
         </div>
-        <SearchList searchHistory={searchHistory}  />
+         <SearchList searchHistory={searchHistory} />
+        
         </div>
        
         
