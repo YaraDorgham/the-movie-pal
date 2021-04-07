@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/the-movie-pal/static/css/main.09771f40.chunk.css",
+    "main.js": "/the-movie-pal/static/js/main.22d17278.chunk.js",
+    "main.js.map": "/the-movie-pal/static/js/main.22d17278.chunk.js.map",
+    "runtime-main.js": "/the-movie-pal/static/js/runtime-main.34f7527c.js",
+    "runtime-main.js.map": "/the-movie-pal/static/js/runtime-main.34f7527c.js.map",
+    "static/js/2.0a009bdd.chunk.js": "/the-movie-pal/static/js/2.0a009bdd.chunk.js",
+    "static/js/2.0a009bdd.chunk.js.map": "/the-movie-pal/static/js/2.0a009bdd.chunk.js.map",
+    "index.html": "/the-movie-pal/index.html",
+    "static/css/main.09771f40.chunk.css.map": "/the-movie-pal/static/css/main.09771f40.chunk.css.map",
+    "static/js/2.0a009bdd.chunk.js.LICENSE.txt": "/the-movie-pal/static/js/2.0a009bdd.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.34f7527c.js",
+    "static/js/2.0a009bdd.chunk.js",
+    "static/css/main.09771f40.chunk.css",
+    "static/js/main.22d17278.chunk.js"
+  ]
+}
