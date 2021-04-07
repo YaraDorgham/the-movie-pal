@@ -25,7 +25,11 @@ const SearchBar =(props)=>{
 
     
 
-  
+    const search =(obj)=>{
+       
+       console.log(obj);
+
+    }
 
  
 
@@ -38,8 +42,6 @@ const SearchBar =(props)=>{
          
             moviesRef.add({term:obj,created: new Date()})
                 
-            
-
         });
 
     };
@@ -73,7 +75,7 @@ const SearchBar =(props)=>{
                 </div>
             </form>
         </div>
-         <SearchList searchHistory={searchHistory} />
+         <SearchList searchHistory={searchHistory} Quicksearch={search}/>
         
         </div>
        

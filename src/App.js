@@ -52,11 +52,8 @@ const App =()=>{
                          <SearchBar onSubmit={onSearchSubmit}/> 
                          <MovieList movies={searchMovies} genreList={genres}/> 
                     </Route >
-                    {/* <Route exact path="/movie/:id" render={({match}) => (
-                        movies.length===0 ? <Spinner />: <Popup movie={movies.find(m => m.id === match.params.id)} />
-                    )} /> */}
-
-                        <Route  path="/movie/:id" render={({match}) => (
+                   
+                    <Route  path="/movie/:id" render={({match}) => (
                         movies.length===0 ? <Spinner />: <Popup  movieID={match.params.id} />
                     )} />
 

@@ -6,7 +6,7 @@ const SearchList =(props)=>{
     const history=data.map((search)=>{
         return( 
         <span>
-        <label className="searchHistory" key={search}>{`${search} `}</label>
+        <label className="searchHistory" key={search} onClick={props.Quicksearch(search)}>{`${search} `}</label>
         </span>
         );
     });

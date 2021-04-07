@@ -1,5 +1,5 @@
 import firebase from "firebase"; 
- // Your web app's Firebase configuration
+ 
  var firebaseConfig =  {
     apiKey: "AIzaSyBGcqsSwamMYXl1C95KOdfhSkb9bMsViFM",
     authDomain: "the-movie-pal.firebaseapp.com",
