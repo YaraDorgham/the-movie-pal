@@ -1,10 +1,11 @@
-import React,{useEffect,useState,useHistory} from 'react';  
+import React,{useEffect,useState} from 'react';  
 import { Spinner } from 'react-bootstrap';
 import './Popup.css';  
 import axios from 'axios';
 const api_key='78da18deb28f6efe0113be955d928e99'; 
-
+import { useHistory } from 'react-router-dom';
 const Popup =(props)=>  {  
+    const history=useHistory();
     const [movie,setMovie]=useState([]);
 
 useEffect( ()=>{
@@ -21,11 +22,12 @@ useEffect( ()=>{
 },[]);
 
 
+
 return (  
 
 <div className='popup' >  
 <div className='popup\_inner'> 
-<button className="close" onClick={console.log("close")}>X</button> 
+<button className="close" onClick={()=>history.goBack()}>X</button> 
 {movie.length==0?<Spinner />: 
 <div> 
     <h1>{ movie.original_title }</h1>  

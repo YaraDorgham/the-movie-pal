@@ -1,6 +1,9 @@
 .searchHistory {
   color: rgb(7, 1, 61);
   font-size: 15px;
+  margin: 10px;
+  align-content: center;
+  text-decoration: underline;
 }
 
 .alignHorz {
