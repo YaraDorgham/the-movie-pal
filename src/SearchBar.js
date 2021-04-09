@@ -18,20 +18,21 @@ const SearchBar =(props)=>{
 
     useEffect( ()=>{
         renderSearch();
-        data = firebase.firestore().collection("moviesearch").get();
+        //data = firebase.firestore().collection("moviesearch").get();
      
          
-    },[moviesRef]);
+    },[term]);
 
     
 
-    const search =(obj)=>{
-       
-       console.log(obj);
+    
+
+    const trial =(obj)=>{
+        setTerm(obj);
+        props.onSubmit(obj);
+        addSearch(obj);
 
     }
-
- 
 
     const addSearch = async(obj) => {  
 
@@ -75,7 +76,7 @@ const SearchBar =(props)=>{
                 </div>
             </form>
         </div>
-         <SearchList searchHistory={searchHistory} Quicksearch={search}/>
+         <SearchList searchHistory={searchHistory} Quicksearch={(obj)=>trial(obj)}/>
         
         </div>
        
