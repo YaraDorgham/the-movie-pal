@@ -3,7 +3,7 @@ import './SearchBar.css';
 import firebase from "./firebase";
 import SearchList from './SearchList';
 import { Spinner } from 'react-bootstrap';
-const SearchBar =(props)=>{
+const SearchBar =({onSubmit})=>{
     const [term,setTerm]=useState('');
     const [searchHistory,setSearchHistory]=useState([]);
     var moviesRef = firebase.firestore().collection("moviesearch"); 
@@ -11,15 +11,18 @@ const SearchBar =(props)=>{
     var searchTerms=[];
     const onFormSubmit= (event)=>{
         event.preventDefault();
-        props.onSubmit(term);
+        onSubmit(term);
         addSearch(term);
     };
 
 
     useEffect( ()=>{
-        renderSearch();
-        //data = firebase.firestore().collection("moviesearch").get();
-     
+
+        const fetchSearchHistory=async()=>{
+            await getSearchHistory();
+        }
+        
+        fetchSearchHistory();     
          
     },[term]);
 
@@ -29,35 +32,26 @@ const SearchBar =(props)=>{
 
     const trial =(obj)=>{
         setTerm(obj);
-        props.onSubmit(obj);
+        onSubmit(obj);
         addSearch(obj);
 
     }
 
     const addSearch = async(obj) => {  
-
-        await moviesRef
-        .where("term", "==", obj).get()
-        .then(function(querySnapshot) {
-           
-         
-            moviesRef.add({term:obj,created: new Date()})
+            
+        moviesRef.add({term:obj,created: new Date()})
                 
-        });
-
     };
 
-  const renderSearch = ()=>{
+  const getSearchHistory =async ()=>{
     var terms=[];
-    moviesRef.orderBy("created","desc").limit(5).get().then((querySnapshot) => {
+    const querySnapshot=await moviesRef.orderBy("created","desc").limit(5).get();
         querySnapshot.forEach((doc) => {
             terms=[...terms,doc.data().term]
             
         });
         setSearchHistory(terms)
-    });
-  
-    return terms;
+    
   }
 
    

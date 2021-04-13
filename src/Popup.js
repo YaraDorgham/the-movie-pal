@@ -1,50 +1,56 @@
-import React,{useEffect,useState} from 'react';  
-import { Spinner } from 'react-bootstrap';
-import './Popup.css';  
-import axios from 'axios';
-const api_key='78da18deb28f6efe0113be955d928e99'; 
-import { useHistory } from 'react-router-dom';
-const Popup =(props)=>  {  
-    const history=useHistory();
-    const [movie,setMovie]=useState([]);
+import React, { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
+import "./Popup.css";
+import movieDB from "./api/the-movie-db";
+import { useHistory } from "react-router-dom";
+const Popup = ({ movieID, fullscreenpopup, close }) => {
+  const history = useHistory();
+  const [movie, setMovie] = useState([]);
+  const [fullscreen, setFullscreen] = useState(false);
 
-useEffect( ()=>{
-
-    async function fetchData(){
-        const response= await axios.get('https://api.themoviedb.org/3/movie/'+props.movieID +'?api_key='+api_key);
-        setMovie(response.data);
-        
-       
+  useEffect(() => {
+    setFullscreen(fullscreenpopup);
+    async function fetchData() {
+      const response = await movieDB.get("/movie/" + movieID);
+      setMovie(response.data);
     }
-    fetchData()
-   
-     
-},[]);
+    fetchData();
+  }, []);
 
+  const closepopup = () => {
+    if (fullscreenpopup == true) {
+      history.goBack();
+    } else {
+      {
+        close();
+      }
+    }
+  };
 
-
-return (  
-
-<div className='popup' >  
-<div className='popup\_inner'> 
-<button className="close" onClick={()=>history.goBack()}>X</button> 
-{movie.length==0?<Spinner />: 
-<div> 
-    <h1>{ movie.original_title }</h1>  
-    <div className="popuprow">
-        <img className="popupimg" src={'https://image.tmdb.org/t/p/w200/'+  movie.poster_path} alt=""></img>
-        <p className="description">{movie.overview}</p>
+  return (
+    <div className={fullscreen === false ? "popup" : "popupfull"}>
+      <div className="popup\_inner">
+        <button className="close" onClick={closepopup}>
+          X
+        </button>
+        {movie.length == 0 ? (
+          <Spinner />
+        ) : (
+          <div>
+            <h1>{movie.original_title}</h1>
+            <div className="popuprow">
+              <img
+                className="popupimg"
+                src={"https://image.tmdb.org/t/p/w200/" + movie.poster_path}
+                alt=""
+              ></img>
+              <p className="description">{movie.overview}</p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
-</div>
-}
-
-
-  
-</div>
-  
-</div>  
-);  
- 
-}  
+  );
+};
 
 export default Popup;
