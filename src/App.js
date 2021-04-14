@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useHistory } from "react";
-import axios from "axios";
 import MovieList from "./MovieList";
 import SearchBar from "./SearchBar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -36,7 +35,7 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             <h1>Playing Now</h1>
-            {movies.length === 0 || genres.length == 0 ? (
+            {movies.length == 0 || genres.length == 0 ? (
               <Spinner />
             ) : (
               <MovieList movies={movies} genreList={genres} playNow={true} />
@@ -54,10 +53,10 @@ const App = () => {
           <Route
             path="/movie/:id"
             render={({ match }) =>
-              movies.length === 0 ? (
+              movies.length == 0 ? (
                 <Spinner />
               ) : (
-                <Popup movieID={match.params.id} fullscreenpopup={true} />
+                <Popup movieID={match.params.id} />
               )
             }
           />

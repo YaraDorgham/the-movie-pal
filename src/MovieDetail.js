@@ -36,13 +36,13 @@ const MovieDetail = ({
         <img src={path} alt="" />
         <p>{description}</p>
       </div>
-      <Button className="ButtonView" onClick={handleShow}>
-        {" "}
-        View More
-      </Button>
-      {showPopup == true ? (
-        <Popup movieID={id} fullscreenpopup={false} close={closepopup} />
-      ) : null}
+      <div className="parentButton">
+        <Button className="ButtonView" onClick={handleShow}>
+          {" "}
+          View More
+        </Button>
+      </div>
+      {showPopup ? <Popup movieID={id} close={closepopup} /> : null}
       <hr />
     </div>
   );

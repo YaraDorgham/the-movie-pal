@@ -1,4 +1,5 @@
-{ "homepage": "http://YaraDorgham.github.io/the-movie-pal",
+{
+  "homepage": "http://YaraDorgham.github.io/the-movie-pal",
   "name": "movie",
   "version": "0.1.0",
   "private": true,
@@ -51,6 +52,12 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "gh-pages": "^3.1.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
     "prettier": "^2.2.1"
+  },
+  "husky": {
+    "hooks": {"pre-commit":  "eslint src --fix"
+      }
   }
 }

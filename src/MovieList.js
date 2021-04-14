@@ -5,12 +5,12 @@ const MovieList = ({ movies, genreList, playNow }) => {
   const allmovies = movies.map((movie) => {
     const movieGenre = movie.genre_ids.map((idgenre) => {
       const type = genreList.find((element) => element.id == idgenre);
-      return <div>{type.name}</div>;
+      return <div key={type.id}>{type.name}</div>;
     });
 
     return (
       <MovieDetail
-        key={movie.poster_path}
+        key={movie.id}
         id={movie.id}
         title={movie.original_title}
         description={movie.overview}

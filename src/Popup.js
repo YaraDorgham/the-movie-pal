@@ -3,13 +3,17 @@ import { Spinner } from "react-bootstrap";
 import "./Popup.css";
 import movieDB from "./api/the-movie-db";
 import { useHistory } from "react-router-dom";
-const Popup = ({ movieID, fullscreenpopup, close }) => {
+const Popup = ({ movieID, close }) => {
   const history = useHistory();
   const [movie, setMovie] = useState([]);
   const [fullscreen, setFullscreen] = useState(false);
 
   useEffect(() => {
-    setFullscreen(fullscreenpopup);
+    const loc = window.location.pathname;
+    if (loc.includes("movie")) {
+      setFullscreen(true);
+    }
+
     async function fetchData() {
       const response = await movieDB.get("/movie/" + movieID);
       setMovie(response.data);
@@ -18,7 +22,7 @@ const Popup = ({ movieID, fullscreenpopup, close }) => {
   }, []);
 
   const closepopup = () => {
-    if (fullscreenpopup == true) {
+    if (fullscreen == true) {
       history.goBack();
     } else {
       {
@@ -28,7 +32,7 @@ const Popup = ({ movieID, fullscreenpopup, close }) => {
   };
 
   return (
-    <div className={fullscreen === false ? "popup" : "popupfull"}>
+    <div className={fullscreen == false ? "popup" : "popupfull"}>
       <div className="popup\_inner">
         <button className="close" onClick={closepopup}>
           X
