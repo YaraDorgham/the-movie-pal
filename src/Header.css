@@ -1,31 +1,24 @@
-.headerSearch{
-    align-content: center;
-    text-align: center;
-    position: relative;
-    top: 5%;
-    left: 97%;
-    font-weight: bold;
-
+.headerSearch {
+  font-weight: bold;
+  margin-right: 10px;
 }
 
-.headerPlay{
-    align-content: center;
-    text-align: center;
-    position: relative;
-    top: 5%;
-    left: 87%;
-    font-weight: bold;
-
+.headerPlay {
+  font-weight: bold;
 }
 
-.rectangle{
-    width: 1350px;
-    height: 15px;
-    padding: 20px;
-    border: 3px solid rgb(187, 17, 17);
-    align-content: center;
-    position: relative;
-    top: 10%;
-    left: 0%;
+.rectangle {
+  clear: left;
+  overflow: hidden;
+  height: 15px;
+  padding: 20px;
+  border: 3px solid rgb(187, 17, 17);
+  align-content: center;
+  position: relative;
+  top: 10%;
+  left: 0%;
 }
 
+.centerHeader {
+  text-align: right;
+}
