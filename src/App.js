@@ -6,12 +6,14 @@ import Header from "./Header";
 import Popup from "./Popup";
 import Spinner from "./Spinner";
 import movieDB from "./api/the-movie-db";
-const App = () => {
+import { connect } from "react-redux";
+const App = ({ ID }) => {
   const [movies, setMovies] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
+    //console.log(props.ID);
     async function fetchData() {
       const response = await movieDB.get("/movie/now_playing");
       setMovies(response.data.results.slice(0, 5));
@@ -40,6 +42,7 @@ const App = () => {
             ) : (
               <MovieList movies={movies} genreList={genres} playNow={true} />
             )}
+            {ID !== null ? <Popup /> : null}
           </Route>
           <Route path="/search">
             <SearchBar onSubmit={onSearchSubmit} />
@@ -53,11 +56,7 @@ const App = () => {
           <Route
             path="/movie/:id"
             render={({ match }) =>
-              movies.length == 0 ? (
-                <Spinner />
-              ) : (
-                <Popup movieID={match.params.id} />
-              )
+              movies.length == 0 ? <Spinner /> : <Popup />
             }
           />
         </Switch>
@@ -66,4 +65,8 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return { ID: state.movieID };
+};
+
+export default connect(mapStateToProps)(App);

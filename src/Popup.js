@@ -3,7 +3,9 @@ import { Spinner } from "react-bootstrap";
 import "./Popup.css";
 import movieDB from "./api/the-movie-db";
 import { useHistory } from "react-router-dom";
-const Popup = ({ movieID, close }) => {
+import { connect } from "react-redux";
+import { setMovieID } from "./actions";
+const Popup = ({ ID, setMovieID }) => {
   const history = useHistory();
   const [movie, setMovie] = useState([]);
   const [fullscreen, setFullscreen] = useState(false);
@@ -15,7 +17,7 @@ const Popup = ({ movieID, close }) => {
     }
 
     async function fetchData() {
-      const response = await movieDB.get("/movie/" + movieID);
+      const response = await movieDB.get("/movie/" + ID);
       setMovie(response.data);
     }
     fetchData();
@@ -24,9 +26,10 @@ const Popup = ({ movieID, close }) => {
   const closepopup = () => {
     if (fullscreen == true) {
       history.goBack();
+      setMovieID(null);
     } else {
       {
-        close();
+        setMovieID(null);
       }
     }
   };
@@ -34,7 +37,7 @@ const Popup = ({ movieID, close }) => {
   return (
     <div className={fullscreen == false ? "popup" : "popupfull"}>
       <div className="popup\_inner">
-        <button className="close" onClick={closepopup}>
+        <button className="close" onClick={closepopup()}>
           X
         </button>
         {movie.length == 0 ? (
@@ -57,4 +60,8 @@ const Popup = ({ movieID, close }) => {
   );
 };
 
-export default Popup;
+const mapStateToProps = (state) => {
+  return { ID: state.movieID };
+};
+
+export default connect(mapStateToProps, { setMovieID })(Popup);
